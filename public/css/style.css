@@ -6,3 +6,34 @@ body {
 a {
   color: #00B7FF;
 }
+
+.drink-inner {
+    border-radius: 5px;
+    padding: 10px;
+}
+.drink-inner:hover {
+    border: 1px solid;
+    box-shadow: 3px 5px 12px -4px;
+}
+
+.drink-inner h3 {
+    margin-top: 0;
+    text-align: center;
+}
+ul.ingredients {
+    padding-left: 10px;
+}
+
+.selected-drink {
+    border: 1px solid;
+    box-shadow: 3px 5px 12px -4px;
+}
+
+.button-container {
+    text-align: center;
+    margin-top: 20px
+}
+
+#make-button {
+    width: 100%;
+}
