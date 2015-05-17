@@ -1,9 +1,9 @@
 (function(){
-    angular.module('drinks', ['ngRoute'])
-        .config(['$routeProvider', '$locationProvider', drinkConfig])
+    angular.module('drinks', ['ngResource'])
+        .config(['$locationProvider', drinkConfig])
     ;
 
-    function drinkConfig($routeProvider, $locationProvider)
+    function drinkConfig($locationProvider)
     {
         //Using Non HTML5 Mode with HashBang (make sure links include #!)
         $locationProvider.html5Mode({enabled: false, requireBase: true});

@@ -1,28 +1,10 @@
 (function(){
     angular.module('drinks')
-        .controller('IndexController', ['DrinkService', IndexController]);
+        .controller('IndexController', ['DrinkService', 'Drink', IndexController]);
 
-    function IndexController(DrinkService)
+    function IndexController(DrinkService, Drink)
     {
-        this.drinks = [
-            {
-                id: 1,
-                name: 'Martini',
-                ingredients: [
-                    '1 part Vodka',
-                    '1 part Sprite'
-                ]
-            },
-            {
-                id: 2,
-                name: 'Corkscrew',
-                ingredients: [
-                    '1 part Vodka',
-                    '1 part Orange Juice'
-                ]
-            }
-        ];
-
+        this.drinks = Drink.query();
         this.drink = {
             id: 0,
             size: 0

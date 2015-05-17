@@ -18,12 +18,12 @@ module.exports = function (grunt)
         bower: {
             install: {
                 options: {
-                    targetDir: 'public/js/vendor'
+                    targetDir: 'public/vendor'
                 }
             }
         },
 
-        // Used to copy files from the bower directory to our public/js/vendor when the grunt-bower-task can't
+        // Used to copy files from the bower directory to our public/vendor when the grunt-bower-task can't
         // figure it out.
         // font-awesome:  needs to preserve the dir structure between css and fonts folders
         // jquery.ui:     doesn't have a main specified in json, so need to choose which files we want
@@ -35,14 +35,14 @@ module.exports = function (grunt)
                         expand: true,
                         cwd: '<%=  config.bower_directory %>/font-awesome',
                         src: ['css/font-awesome.css', 'fonts/*'],
-                        dest: 'public/js/vendor/font-awesome'
+                        dest: 'public/vendor/font-awesome'
                     },
                     // bootstrap: preserve dir structure of css an fonts folders
                     {
                         expand: true,
                         cwd: '<%=  config.bower_directory %>/bootstrap/dist',
                         src: ['**/!(*min*|npm.js)'],
-                        dest: 'public/js/vendor/bootstrap'
+                        dest: 'public/vendor/bootstrap'
                     },
                     // Moved to managed bower, now under angular-ui-bootstrap-bower package
                     //{
@@ -50,7 +50,7 @@ module.exports = function (grunt)
                     //      cwd: '<%=  config.unmanaged_directory %>/angular-ui-bootstrap',
                     //      //src: ['ui-bootstrap-tpls-0.11.0.js','ui-bootstrap-tpls-0.11.0.js'],
                     //      src: ['ui-bootstrap-tpls-0.12.0.min.js','ui-bootstrap-tpls-0.12.0.min.js'],
-                    //      dest: 'public/js/vendor/angular-ui-bootstrap'
+                    //      dest: 'public/vendor/angular-ui-bootstrap'
                     //}
                 ]
             }
@@ -69,13 +69,13 @@ module.exports = function (grunt)
             main: {
                 files: {
                     'public/js/<%= pkg.name %>.min.js': [
-                        'public/js/vendor/jquery/jquery.js',
-                        'public/js/vendor/angular/angular.js',
-                        //'public/js/vendor/angular-route/angular-route.js',
-                        //'public/js/vendor/angular-animate/angular-animate.js',
-                        'public/js/vendor/underscore/underscore.js',
+                        'public/vendor/jquery/jquery.js',
+                        'public/vendor/angular/angular.js',
+                        //'public/vendor/angular-route/angular-route.js',
+                        //'public/vendor/angular-animate/angular-animate.js',
+                        'public/vendor/underscore/underscore.js',
 
-                        'public/js/vendor/**/*.js',
+                        'public/vendor/**/*.js',
 
                         'public/js/app/base/**/*.js',
                         'public/js/app/desktop/desktopApp.js',
@@ -120,7 +120,7 @@ module.exports = function (grunt)
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-bower-task');
 
-    // Runs bower install and copies everything to our public/js/vendor
+    // Runs bower install and copies everything to our public/vendor
     grunt.registerTask('bower-install', ['bower', 'copy']);
 
     // Compresses all js/css and prepares for production

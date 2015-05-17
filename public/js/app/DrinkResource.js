@@ -1,9 +1,9 @@
 (function(){
     angular.module('drinks')
-        .factory('Drink', [Drink]);
+        .factory('Drink', ['$resource', Drink]);
 
-    function Drink()
+    function Drink($resource)
     {
-        return $resource();
+        return $resource('/drinks/:id');
     }
 })();
