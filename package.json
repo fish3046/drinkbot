@@ -17,6 +17,7 @@
     "grunt-contrib-uglify": "^0.9.1",
     "jade": "~1.9.2",
     "morgan": "~1.5.1",
+    "onoff": "^1.0.2",
     "serve-favicon": "~2.2.0"
   }
 }

@@ -74,16 +74,18 @@ var gracefulShutdown = function() {
 	robot.shutdown();
 
 	console.log("Received kill signal, shutting down gracefully.");
-	app.close(function() {
-		console.log("Closed out remaining connections.");
-		process.exit()
-	});
+
+	process.exit();
+	//app.close(function() {
+	//	console.log("Closed out remaining connections.");
+	//	process.exit()
+	//});
 
 	// if after
-	setTimeout(function() {
-		console.error("Could not close connections in time, forcefully shutting down");
-		process.exit()
-	}, 10000);
+	//setTimeout(function() {
+	//	console.error("Could not close connections in time, forcefully shutting down");
+	//	process.exit()
+	//}, 10000);
 };
 
 // listen for TERM signal .e.g. kill

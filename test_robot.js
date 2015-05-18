@@ -1,12 +1,12 @@
-var robot = require('modules/robot.js');
+var robot = require('./modules/robot');
 
 var pumpconfig = [
 	{
-		pin: 27,
+		pin: 16,
 		ingredient: 1
 	},
 	{
-		pin: 24,
+		pin: 19,
 		ingredient: 2
 	}
 ];
@@ -17,14 +17,14 @@ var drink = {
 	ingredients: [
 		{
 			id: 1,
-			pump_time: 1000,
+			pump_time: 10000,
 			pump_start_delay: 0,
 			desc: '1 part Vodka'
 		},
 		{
 			id: 2,
-			pump_time: 3000,
-			pump_start_delay: 0,
+			pump_time: 15000,
+			pump_start_delay: 5000,
 			desc: '3 part Sprite'
 		}
 	]
