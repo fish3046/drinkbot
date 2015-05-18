@@ -1,3 +1,4 @@
+// EXPRESS SYSTEM
 var express = require('express');
 var path = require('path');
 //var favicon = require('serve-favicon');
@@ -5,10 +6,17 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+// BACKEND MODULES
+var robot = require('./modules/robot');
+var drinkdb = require('./modules/drink_library');
+
+robot.init(drinkdb.pumps);
+
+// ROUTING
 var routes = require('./routes/index');
-//var users = require('./routes/users');
 var drinks = require('./routes/drinks');
 
+// APPLICATION INSTANCE
 var app = express();
 
 // view engine setup
@@ -25,7 +33,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/drinks', drinks);
-//app.use('/users', users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -60,3 +67,27 @@ app.use(function(err, req, res, next) {
 
 
 module.exports = app;
+
+// this function is called when you want the server to die gracefully
+// i.e. wait for existing connections
+var gracefulShutdown = function() {
+	robot.shutdown();
+
+	console.log("Received kill signal, shutting down gracefully.");
+	app.close(function() {
+		console.log("Closed out remaining connections.");
+		process.exit()
+	});
+
+	// if after
+	setTimeout(function() {
+		console.error("Could not close connections in time, forcefully shutting down");
+		process.exit()
+	}, 10000);
+};
+
+// listen for TERM signal .e.g. kill
+process.on('SIGTERM', gracefulShutdown);
+
+// listen for INT signal e.g. Ctrl-C
+process.on('SIGINT', gracefulShutdown);

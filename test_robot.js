@@ -16,20 +16,21 @@ var drink = {
 	name: 'Martini',
 	ingredients: [
 		{
-			'id': 1,
-			'pump_time': 1000,
-			'pump_start_delay': 0,
-			'desc': '1 part Vodka'
+			id: 1,
+			pump_time: 1000,
+			pump_start_delay: 0,
+			desc: '1 part Vodka'
 		},
 		{
-			'id': 2,
-			'pump_time': 3000,
-			'pump_start_delay': 0,
-			'desc': '3 part Sprite'
+			id: 2,
+			pump_time: 3000,
+			pump_start_delay: 0,
+			desc: '3 part Sprite'
 		}
 	]
 };
 
 robot.init(pumpconfig);
-robot.makeDrink(drink);
-robot.shutdown();
+robot.makeDrink(drink, function(){
+	robot.shutdown();
+});

@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <title>Drink Machine</title>
 
-    <link rel="stylesheet" href="/js/vendor/bootstrap/css/bootstrap.css"/>
-    <link rel="stylesheet" href="/js/vendor/bootstrap/css/bootstrap-theme.css"/>
+    <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.css"/>
+    <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap-theme.css"/>
     <link rel="stylesheet" href="/css/style.css"/>
 </head>
 <body>
@@ -26,7 +26,7 @@
             <div class="drink-inner" ng-class="{'selected-drink': index.drink.id == drink.id}" ng-click="index.drink.id = drink.id">
                 <h3>{{drink.name}}</h3>
                 <ul class="ingredients">
-                    <li ng-repeat="ingredient in drink.ingredients">{{ingredient}}</li>
+                    <li ng-repeat="ingredient in drink.ingredients">{{ingredient.desc}}</li>
                 </ul>
             </div>
         </div>

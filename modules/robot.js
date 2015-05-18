@@ -67,6 +67,10 @@ var PumpManager = function(pumps){
 var BarTender = function(pumpmanager)
 {
 	var manager = pumpmanager;
+	var activePumps = 0;
+	var active = false;
+	var completeCallback;
+	var currentDrink = null;
 
 	/**
 	 * Checks if we our PumpManager knows about all the ingredients
@@ -91,10 +95,19 @@ var BarTender = function(pumpmanager)
 		if (!this.canMake(drink))
 			throw new Error("Robot is unaware of at least one ingredient");
 
-		console.log("Creating a " + drink.name);
-		var ingredients = drink.ingredients;
+		if (drink.ingredients.length == 0)
+			throw new Error("Invalid drink: no ingredients");
 
-		for (var i = 0; i < ingredients.length; i++) {
+		console.log("\033[31m[MSG] Creating a " + drink.name + " \033[91m");
+
+		var ingredients = drink.ingredients;
+		active = true;
+		activePumps = 0;
+		completeCallback = callback;
+		currentDrink = drink;
+
+		for (var i = 0; i < ingredients.length; i++)
+		{
 			(function (i) {
 				setTimeout(function () {  // Delay implemented to have a top-biased mix
 					var gpio = manager.getPumpByIngredient(ingredients[i].id);
@@ -104,28 +117,63 @@ var BarTender = function(pumpmanager)
 		}
 	};
 
+	this.getCurrentDrink = function()
+	{
+		return currentDrink;
+	};
+
+	this.isActive = function()
+	{
+		return active;
+	};
+
 	function pumpMilliseconds(pump, ms)
 	{
 		startPump(pump);
+
 		setTimeout(function () {
 			stopPump(pump);
+
+			if (activePumps == 0)
+			{
+				finish();
+			}
 		}, ms);
+	}
+
+	/**
+	 * Called by pumpMilliseconds when it detects all pumps have shut off
+	 */
+	function finish()
+	{
+		console.log("\033[31m[MSG] Finished making " + currentDrink.name + "\033[91m");
+
+		active = false;
+
+		if (completeCallback)
+			completeCallback(currentDrink);
+
+		currentDrink = null;
 	}
 
 	function startPump(gpio)
 	{
 		console.log("\033[32m[PUMP] Starting " + gpio + "\033[91m");
 		gpio.writeSync(1);
+		++activePumps;
 	}
 
 	function stopPump(gpio)
 	{
 		console.log("\033[32m[PUMP] Stopping " + gpio + "\033[91m");
 		gpio.writeSync(0);
+		--activePumps;
 	}
 };
 
-
+/*
+ * EXPORTS
+ */
 
 exports.init = function(pumps)
 {
@@ -147,5 +195,7 @@ exports.makeDrink = function(drink, callback)
 
 exports.shutdown = function()
 {
+	console.log("\033[31m[MSG] Shutting down\033[91m");
+
 	manager.shutdown();
 };
