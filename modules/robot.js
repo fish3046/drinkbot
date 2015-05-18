@@ -13,12 +13,15 @@ var PumpManager = function(pumps){
 	var ingredient_to_gpio = {};
 	// Array of Gpio objects, keyed to pin number
 	var gpios = {};
+	var pumpCount = 0;
 
 	for (var i in pumps)
 	{
 		if (pumps.hasOwnProperty(i)) {
 			ingredient_to_gpio[pumps[i].ingredient] = pumps[i].pin;
 			gpios[pumps[i].pin] = new Gpio(pumps[i].pin, 'out');
+
+			++pumpCount;
 		}
 	}
 
@@ -28,7 +31,7 @@ var PumpManager = function(pumps){
 	 */
 	this.pumpCount = function()
 	{
-		return gpios.length;
+		return pumpCount;
 	};
 
 	/**
