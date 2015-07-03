@@ -7,14 +7,23 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 // BACKEND MODULES
-var robot = require('./modules/robot');
+//var robot = require('./modules/robot');
 var drinkdb = require('./modules/drink_library');
 
-robot.init(drinkdb.pumps);
+var mongoose = require('mongoose');
+var db = mongoose.connect("mongodb://localhost:27017/drinkbot");
+
+var DrinkSchema = require('./models/Drink.js').DrinkSchema;
+var Drink = db.model('drinks', DrinkSchema);
+var IngredientSchema = require('./models/Ingredient.js').IngredientSchema;
+var Ingredient = db.model('ingredients', IngredientSchema);
+
+//robot.init(drinkdb.pumps);
 
 // ROUTING
 var routes = require('./routes/index');
 var drinks = require('./routes/drinks');
+var dbroutes = require('./routes/db');
 
 // APPLICATION INSTANCE
 var app = express();
@@ -31,8 +40,18 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// ***** ROUTES *****
 app.use('/', routes);
-app.use('/drinks', drinks);
+
+app.get('/drink', dbroutes.getGeneric(Drink));
+app.post('/drink', dbroutes.postGeneric(Drink));
+app.delete('/drink/:id', dbroutes.deleteGeneric(Drink));
+
+app.get('/ingredient', dbroutes.getGeneric(Ingredient));
+app.post('/ingredient', dbroutes.postGeneric(Ingredient));
+app.delete('/ingredient/:id', dbroutes.deleteGeneric(Ingredient));
+// ***** END ROUTES *****
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -90,6 +109,5 @@ var gracefulShutdown = function() {
 
 // listen for TERM signal .e.g. kill
 process.on('SIGTERM', gracefulShutdown);
-
 // listen for INT signal e.g. Ctrl-C
 process.on('SIGINT', gracefulShutdown);

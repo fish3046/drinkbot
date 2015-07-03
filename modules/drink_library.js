@@ -25,7 +25,7 @@ module.exports = {
 			name: 'Corkscrew',
 			ingredients: [
 				{
-					'id': 1,
+					name: 'Vodka',
 					'pump_time': 3000,
 					'desc': '1 part Vodka'
 				},

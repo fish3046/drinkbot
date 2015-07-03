@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var drinks = require('../modules/drink_library').drinks;
-var robot = require('../modules/robot');
+//var robot = require('../modules/robot');
 
 var drinkMake01 = function(req, res, next)
 {
