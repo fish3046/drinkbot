@@ -12,6 +12,7 @@
     "debug": "~2.1.1",
     "ejs": "^2.3.1",
     "express": "~4.12.2",
+    "express-ejs-layouts": "^1.1.0",
     "grunt-bower-task": "^0.4.0",
     "grunt-contrib-copy": "^0.8.0",
     "grunt-contrib-uglify": "^0.9.1",

@@ -1,10 +1,34 @@
 /* GET /_anything_ */
-exports.getGeneric = function(Model)
+exports.getAllGeneric = function(Model)
 {
 	return function(req, res)
 	{
 		Model.find({}, function (err, records){
-			res.json(records);
+			if (err || !records) {
+				res.json({error: err});
+				res.status(400);
+			} else {
+				res.json(records);
+			}
+		});
+	}
+};
+
+/* GET /_anything_ */
+exports.getGeneric = function(Model)
+{
+	return function(req, res)
+	{
+		Model.find({_id: req.params.id}, function (err, record){
+			if (err || !record) {
+				res.json({error: err});
+				res.status(400);
+			} else if (record.length == 1) {
+				res.json(record[0]);
+			} else {
+				// If we are finding by ID, assuming that if we don't have 1 record, none are found
+				res.status(404);
+			}
 		});
 	}
 };

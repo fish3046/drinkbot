@@ -4,6 +4,6 @@
 
     function Drink($resource)
     {
-        return $resource('/drinks/:id');
+        return $resource('/db/drink/:drinkid', {drinkid:'@id'});
     }
 })();

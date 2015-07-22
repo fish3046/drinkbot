@@ -5,6 +5,7 @@ var path = require('path');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+//var ejsLayouts = require('express-ejs-layouts');
 
 // BACKEND MODULES
 //var robot = require('./modules/robot');
@@ -31,6 +32,7 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+//app.use(ejsLayouts);
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(__dirname + '/public/favicon.ico'));
@@ -43,13 +45,15 @@ app.use(express.static(path.join(__dirname, 'public')));
 // ***** ROUTES *****
 app.use('/', routes);
 
-app.get('/drink', dbroutes.getGeneric(Drink));
-app.post('/drink', dbroutes.postGeneric(Drink));
-app.delete('/drink/:id', dbroutes.deleteGeneric(Drink));
+app.get('/db/drink', dbroutes.getAllGeneric(Drink));
+app.get('/db/drink/:id', dbroutes.getGeneric(Drink));
+app.post('/db/drink', dbroutes.postGeneric(Drink));
+app.delete('/db/drink/:id', dbroutes.deleteGeneric(Drink));
 
-app.get('/ingredient', dbroutes.getGeneric(Ingredient));
-app.post('/ingredient', dbroutes.postGeneric(Ingredient));
-app.delete('/ingredient/:id', dbroutes.deleteGeneric(Ingredient));
+app.get('/db/ingredient', dbroutes.getAllGeneric(Ingredient));
+app.get('/db/ingredient/:id', dbroutes.getGeneric(Ingredient));
+app.post('/db/ingredient', dbroutes.postGeneric(Ingredient));
+app.delete('/db/ingredient/:id', dbroutes.deleteGeneric(Ingredient));
 // ***** END ROUTES *****
 
 
