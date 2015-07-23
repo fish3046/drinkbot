@@ -5,8 +5,8 @@ exports.getAllGeneric = function(Model)
 	{
 		Model.find({}, function (err, records){
 			if (err || !records) {
-				res.json({error: err});
 				res.status(400);
+				res.json({error: err});
 			} else {
 				res.json(records);
 			}
@@ -21,8 +21,8 @@ exports.getGeneric = function(Model)
 	{
 		Model.find({_id: req.params.id}, function (err, record){
 			if (err || !record) {
-				res.json({error: err});
 				res.status(400);
+				res.json({error: err});
 			} else if (record.length == 1) {
 				res.json(record[0]);
 			} else {
@@ -44,13 +44,36 @@ exports.postGeneric = function(Model)
 
 		instance.save(function(err, record){
 			if (err || !record) {
-				res.json({error: err});
 				res.status(400);
+				res.json({error: err});
 			} else {
-				res.json({drink: record});
+				res.json(record);
 				res.status(201);
 			}
 		});
+	}
+};
+
+/* PUT /_anything_ */
+exports.putGeneric = function(Model)
+{
+	return function(req, res)
+	{
+		console.log(req.body);
+
+		Model.findOneAndUpdate(
+			{_id: req.params.id},
+			req.body,
+			function (err, record) {
+				if (err || !record) {
+					res.status(400);
+					res.json({error: err});
+				} else {
+					res.status(200);
+					res.json(req.body);
+				}
+			}
+		);
 	}
 };
 
@@ -64,8 +87,8 @@ exports.deleteGeneric = function(Model)
 	{
 		Model.findByIdAndRemove({ _id: req.params.id }, function(err, doc){
 			if (err != null) {
-				res.json({error: err});
 				res.status(400);
+				res.json({error: err});
 			} else if (doc == null) {
 				res.status(404);
 				res.send();

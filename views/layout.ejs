@@ -18,7 +18,14 @@
 				<a class="navbar-brand" ng-href="/">Drankz</a>
 			</div>
 			<ul class="nav navbar-nav navbar-right">
-				<li><a ng-href="/manage/drinks">Manage</a></li>
+				<li class="dropdown">
+					<a ng-href="" class="dropdown-toggle" data-toggle="dropdown" role="button">Manage <span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a ng-href="/manage/drinks">Drinks</a></li>
+						<li><a ng-href="/manage/ingredients">Ingredients</a></li>
+						<li><a ng-href="/manage/pumps">Pumps</a></li>
+					</ul>
+				</li>
 			</ul>
 		</div>
 	</nav>
@@ -26,13 +33,15 @@
 	<div ng-view=""></div>
 </div>
 
+<script src="/vendor/jquery/jquery.js" type="application/javascript"></script>
 <script src="/vendor/angular/angular.js" type="application/javascript"></script>
 <script src="/vendor/angular-route/angular-route.js" type="application/javascript"></script>
 <script src="/vendor/angular-resource/angular-resource.js" type="application/javascript"></script>
-<!--<script src="/vendor/bootstrap/js/bootstrap.js"></script>-->
+<script src="/vendor/bootstrap/js/bootstrap.js"></script>
 
 <script src="/app/js/app.js" type="application/javascript"></script>
 <script src="/app/js/IndexController.js" type="application/javascript"></script>
+<script src="/app/js/LocationService.js" type="application/javascript"></script>
 <script src="/app/js/DrinkService.js" type="application/javascript"></script>
 <script src="/app/js/DrinkResource.js" type="application/javascript"></script>
 <script src="/app/js/IngredientResource.js" type="application/javascript"></script>

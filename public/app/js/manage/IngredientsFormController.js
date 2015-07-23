@@ -1,28 +1,36 @@
 (function(){
 	angular.module('drinks')
-		.controller('drinks.manage.IngredientsFormController', ['$routeParams','Drink', IngredientsFormController]);
+		.controller('drinks.manage.IngredientsFormController', ['$routeParams','Ingredient', 'drinks.service.LocationService', IngredientsFormController]);
 
-	function IngredientsFormController($routeParams, Drink)
+	function IngredientsFormController($routeParams, Ingredient, LocationService)
 	{
-		this.ingredient = {};
+		this.ingredient = new Ingredient();
 		var self = this;
 
 		function init()
 		{
 			if ($routeParams.id) {
-				self.ingredient = Drink.get({drinkid: $routeParams.id});
+				self.ingredient = Ingredient.get({id: $routeParams.id});
 			}
 		}
 
 		this.title = function()
 		{
-			return this.ingredient.id != '' ? 'Edit ' + this.ingredient.name : 'Add New Drink';
+			return angular.isString(this.ingredient._id) ? 'Edit ' + this.ingredient.name : 'Add New Ingredient';
 		};
 
 		this.save = function()
 		{
-
+			if (angular.isString(this.ingredient._id))
+				this.ingredient.$update({id: this.ingredient._id}, navBack);
+			else
+				this.ingredient.$save(navBack);
 		};
+
+		function navBack()
+		{
+			LocationService.go('/manage/ingredients');
+		}
 
 		init();
 	}

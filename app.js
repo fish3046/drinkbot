@@ -41,6 +41,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+//app.use(express.compress());
 
 // ***** ROUTES *****
 app.use('/', routes);
@@ -48,11 +49,13 @@ app.use('/', routes);
 app.get('/db/drink', dbroutes.getAllGeneric(Drink));
 app.get('/db/drink/:id', dbroutes.getGeneric(Drink));
 app.post('/db/drink', dbroutes.postGeneric(Drink));
+app.put('/db/drink/:id', dbroutes.putGeneric(Drink));
 app.delete('/db/drink/:id', dbroutes.deleteGeneric(Drink));
 
 app.get('/db/ingredient', dbroutes.getAllGeneric(Ingredient));
 app.get('/db/ingredient/:id', dbroutes.getGeneric(Ingredient));
 app.post('/db/ingredient', dbroutes.postGeneric(Ingredient));
+app.put('/db/ingredient/:id', dbroutes.putGeneric(Ingredient));
 app.delete('/db/ingredient/:id', dbroutes.deleteGeneric(Ingredient));
 // ***** END ROUTES *****
 

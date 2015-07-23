@@ -1,21 +1,9 @@
 (function(){
 	angular.module('drinks')
-		.controller('drinks.manage.IngredientsController', ['DrinkService', 'Drink', IngredientsController]);
+		.controller('drinks.manage.IngredientsController', ['Ingredient', IngredientsController]);
 
-	function IngredientsController(DrinkService, Drink)
+	function IngredientsController(Ingredient)
 	{
-		this.drinks = Drink.query();
-		this.drink = {
-			id: 0,
-			size: 0
-		};
-
-		this.make = function(){
-			DrinkService.make(this.drink).then(function(){
-				alert('Done!');
-			},function(resp){
-				alert('Failed! ' + resp);
-			});
-		};
+		this.ingredients = Ingredient.query();
 	}
 })();

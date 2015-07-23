@@ -15,14 +15,24 @@
 				controller: 'drinks.manage.DrinksController',
 				controllerAs: 'ctrl'
 			})
+			.when('/manage/drinks/form', {
+				templateUrl: '/app/views/manage/drinksform.html',
+				controller: 'drinks.manage.DrinksFormController',
+				controllerAs: 'ctrl'
+			})
 			.when('/manage/drinks/form/:id', {
 				templateUrl: '/app/views/manage/drinksform.html',
 				controller: 'drinks.manage.DrinksFormController',
 				controllerAs: 'ctrl'
 			})
-			.when('/manage/ingredients/:id', {
+			.when('/manage/ingredients', {
 				templateUrl: '/app/views/manage/ingredients.html',
 				controller: 'drinks.manage.IngredientsController',
+				controllerAs: 'ctrl'
+			})
+			.when('/manage/ingredients/form', {
+				templateUrl: '/app/views/manage/ingredientsform.html',
+				controller: 'drinks.manage.IngredientsFormController',
 				controllerAs: 'ctrl'
 			})
 			.when('/manage/ingredients/form/:id', {
