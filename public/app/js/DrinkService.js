@@ -7,7 +7,7 @@
         this.make = function(drink){
             var deferred = $q.defer();
 
-            $http.post('/drinks/make', drink).then(function(){
+            $http.post('/robot/make', drink).then(function(){
                 deferred.resolve();
             }, function(resp){
                 deferred.reject(resp);

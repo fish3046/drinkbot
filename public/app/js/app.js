@@ -40,6 +40,11 @@
 				controller: 'drinks.manage.IngredientsFormController',
 				controllerAs: 'ctrl'
 			})
+			.when('/manage/pumps', {
+				templateUrl: '/app/views/manage/pumps.html',
+				controller: 'drinks.manage.PumpsController',
+				controllerAs: 'ctrl'
+			})
 			.otherwise({
 				templateUrl: '/app/views/index.html',
 				controller: 'IndexController',

@@ -1,3 +1,3 @@
 module.exports = {
-	dburl: 'mongodb://localhost:27017/robot'
+	dburl: 'mongodb://localhost:27017/drinkbot'
 };

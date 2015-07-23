@@ -37,3 +37,7 @@ ul.ingredients {
 #make-button {
     width: 100%;
 }
+
+.gpio-picture img {
+	width: 100%;
+}

@@ -35,14 +35,14 @@ var PumpManager = function(pumps){
 	};
 
 	/**
-	 * @param {int} id
+	 * @param {String} name
 	 * @returns {Gpio}
 	 */
-	this.getPumpByIngredient = function(id)
+	this.getPumpByIngredient = function(name)
 	{
-		if (ingredient_to_gpio.hasOwnProperty(id))
+		if (ingredient_to_gpio.hasOwnProperty(name))
 		{
-			return gpios[ingredient_to_gpio[id]];
+			return gpios[ingredient_to_gpio[name]];
 		}
 
 		return null;
@@ -84,7 +84,7 @@ var BarTender = function(pumpmanager)
 		var ingredients = drink.ingredients;
 
 		for (var i = 0; i < ingredients.length; i++) {
-			if (manager.getPumpByIngredient(ingredients[i].id) == null)
+			if (manager.getPumpByIngredient(ingredients[i].name) == null)
 			{
 				return false;
 			}
@@ -113,7 +113,7 @@ var BarTender = function(pumpmanager)
 		{
 			(function (i) {
 				setTimeout(function () {  // Delay implemented to have a top-biased mix
-					var gpio = manager.getPumpByIngredient(ingredients[i].id);
+					var gpio = manager.getPumpByIngredient(ingredients[i].name);
 					pumpMilliseconds(gpio, ingredients[i].pump_time);
 				}, ingredients[i].pump_start_delay);
 			})(i);

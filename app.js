@@ -9,22 +9,28 @@ var bodyParser = require('body-parser');
 
 // BACKEND MODULES
 //var robot = require('./modules/robot');
-var drinkdb = require('./modules/drink_library');
+var robot = null;	// for workstation testing
+var config = require('./modules/config');
 
 var mongoose = require('mongoose');
-var db = mongoose.connect("mongodb://localhost:27017/drinkbot");
+var db = mongoose.connect(config.dburl);
 
 var DrinkSchema = require('./models/Drink.js').DrinkSchema;
 var Drink = db.model('drinks', DrinkSchema);
 var IngredientSchema = require('./models/Ingredient.js').IngredientSchema;
 var Ingredient = db.model('ingredients', IngredientSchema);
+var PumpSchema = require('./models/Pump.js').PumpSchema;
+var Pump = db.model('pumps', PumpSchema);
 
-//robot.init(drinkdb.pumps);
+// Retrieve pump configuration from mongo, and pass it to the robot
+Pump.find({}, function(err, records){
+	if (err || !records) {
+		throw new Error("Error fetch pump config from mongo: " + err);
+	}
 
-// ROUTING
-var routes = require('./routes/index');
-var drinks = require('./routes/drinks');
-var dbroutes = require('./routes/db');
+	//robot.init(records);
+});
+
 
 // APPLICATION INSTANCE
 var app = express();
@@ -43,8 +49,13 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 //app.use(express.compress());
 
+// ROUTING
+var routes = require('./routes/index');
+var robotroutes = require('./routes/robot');
+var dbroutes = require('./routes/db');
+
 // ***** ROUTES *****
-app.use('/', routes);
+app.get('/', routes.indexPage());
 
 app.get('/db/drink', dbroutes.getAllGeneric(Drink));
 app.get('/db/drink/:id', dbroutes.getGeneric(Drink));
@@ -57,6 +68,14 @@ app.get('/db/ingredient/:id', dbroutes.getGeneric(Ingredient));
 app.post('/db/ingredient', dbroutes.postGeneric(Ingredient));
 app.put('/db/ingredient/:id', dbroutes.putGeneric(Ingredient));
 app.delete('/db/ingredient/:id', dbroutes.deleteGeneric(Ingredient));
+
+app.get('/db/pump', dbroutes.getAllGeneric(Pump));
+app.get('/db/pump/:id', dbroutes.getGeneric(Pump));
+app.post('/db/pump', dbroutes.postGeneric(Pump));
+app.put('/db/pump/:id', dbroutes.putGeneric(Pump));
+app.delete('/db/pump/:id', dbroutes.deleteGeneric(Pump));
+
+app.post('/robot/make', robotroutes.makeDrink(Drink, robot));
 // ***** END ROUTES *****
 
 

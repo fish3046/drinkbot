@@ -1,0 +1,32 @@
+<div class="content">
+	<button ng-click="ctrl.save()" class="btn btn-primary pull-right">Save</button>
+	<h1 class="text-center">Manage Pumps</h1>
+
+	<table class="table">
+		<thead>
+		<tr>
+			<th>PIN</th>
+			<th>Ingredient</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr ng-repeat="pump in ctrl.pumps">
+			<td>
+				<select class="form-control" ng-model="pump.pin">
+					<option ng-repeat="pin in ctrl.pins" value="{{pin.id}}" ng-selected="pin.id == pump.pin">{{pin.label}}</option>
+				</select>
+			</td>
+			<td>
+				<select class="form-control" ng-model="pump.ingredient">
+					<option value=""></option>
+					<option ng-repeat="possibleIngredient in ctrl.ingredients" value="{{possibleIngredient.name}}" ng-selected="possibleIngredient.name == pump.ingredient">{{possibleIngredient.name}}</option>
+				</select>
+			</td>
+		</tr>
+		</tbody>
+	</table>
+
+	<div class="gpio-picture">
+		<img src="/img/GPIO_Pi2.png" alt="GPIO layout"/>
+	</div>
+</div>
