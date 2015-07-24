@@ -19,12 +19,12 @@ exports.getGeneric = function(Model)
 {
 	return function(req, res)
 	{
-		Model.find({_id: req.params.id}, function (err, record){
+		Model.findbyId(req.params.id, function (err, record){
 			if (err || !record) {
 				res.status(400);
 				res.json({error: err});
-			} else if (record.length == 1) {
-				res.json(record[0]);
+			} else if (record) {
+				res.json(record);
 			} else {
 				// If we are finding by ID, assuming that if we don't have 1 record, none are found
 				res.status(404);

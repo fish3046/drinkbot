@@ -8,8 +8,7 @@ var bodyParser = require('body-parser');
 //var ejsLayouts = require('express-ejs-layouts');
 
 // BACKEND MODULES
-//var robot = require('./modules/robot');
-var robot = null;	// for workstation testing
+var robot = require('./modules/robot');
 var config = require('./modules/config');
 
 var mongoose = require('mongoose');
@@ -28,7 +27,7 @@ Pump.find({}, function(err, records){
 		throw new Error("Error fetch pump config from mongo: " + err);
 	}
 
-	//robot.init(records);
+	robot.init(records);
 });
 
 

@@ -1,4 +1,5 @@
-var Gpio = require('onoff').Gpio;
+//var Gpio = require('onoff').Gpio;
+var Gpio = require('./gpiomock').Gpio;
 var manager;
 var bartender;
 
@@ -161,14 +162,14 @@ var BarTender = function(pumpmanager)
 
 	function startPump(gpio)
 	{
-		console.log("\033[32m[PUMP] Starting " + gpio + "\033[91m");
+		console.log("\033[32m[PUMP] Starting " + gpio.gpio + "\033[91m");
 		gpio.writeSync(1);
 		++activePumps;
 	}
 
 	function stopPump(gpio)
 	{
-		console.log("\033[32m[PUMP] Stopping " + gpio + "\033[91m");
+		console.log("\033[32m[PUMP] Stopping " + gpio.gpio + "\033[91m");
 		gpio.writeSync(0);
 		--activePumps;
 	}

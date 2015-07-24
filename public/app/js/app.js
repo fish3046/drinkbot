@@ -7,7 +7,7 @@
     {
         //Using Non HTML5 Mode with HashBang (make sure links include #!)
         //$locationProvider.html5Mode({enabled: true, requireBase: true});
-        $locationProvider.html5Mode(false);
+        $locationProvider.html5Mode(true);
 
         $routeProvider
 			.when('/manage/drinks', {

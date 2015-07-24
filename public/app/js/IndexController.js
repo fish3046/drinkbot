@@ -6,11 +6,17 @@
     {
         this.drinks = Drink.query();
         this.drink = {
-            id: 0,
-            size: 0
+            id: '',
+            size: 'regular'
         };
 
-        this.make = function(){
+        this.make = function()
+		{
+			if (this.drink.id == '') {
+				alert('Select a drink to make');
+				return;
+			}
+
             DrinkService.make(this.drink).then(function(){
                 alert('Done!');
             },function(resp){

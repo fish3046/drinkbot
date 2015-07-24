@@ -36,8 +36,35 @@ ul.ingredients {
 
 #make-button {
     width: 100%;
+	font-size: 43px;
 }
 
 .gpio-picture img {
 	width: 100%;
+}
+
+.drinkContainer {
+	display: inline-block;
+	height: 280px;
+	width: 31%;
+	margin: 10px;
+	line-height: 0.9em;
+	background-color: #FF0000;
+}
+
+.drinkImage {
+	display: inline-block;
+	background-position: center;
+	background-size: cover;
+	height: 100%;
+	width: 100%;
+	opacity: 1;
+}
+
+.drink-size-container {
+	text-align: center;
+}
+.drink-size-container label.btn {
+	font-size: 43px;
+	width: 32%;
 }
