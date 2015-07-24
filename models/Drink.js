@@ -20,8 +20,12 @@ ds.methods.duration = function()
 	var longest = 0;
 	var curIngredientTime = 0;
 
+	if (!this.size) {
+		this.size = 1;
+	}
+
 	for (var i = 0; i < this.ingredients.length; i++) {
-		curIngredientTime = this.ingredients[i].pump_time + this.ingredients[i].pump_start_delay;
+		curIngredientTime = (this.ingredients[i].pump_time * this.size) + this.ingredients[i].pump_start_delay;
 		if (curIngredientTime > longest)
 			longest = curIngredientTime;
 	}

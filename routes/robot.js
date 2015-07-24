@@ -11,6 +11,7 @@ module.exports.makeDrink = function(DrinkSchema, robot)
 			} else if (record) {
 				// Store drink in the request object and move on
 				drink = record;
+				drink.size = req.body.size;
 				next();
 			} else {
 				// If we are finding by ID, assuming that if we don't have 1 record, none are found

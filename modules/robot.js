@@ -103,6 +103,7 @@ var BarTender = function(pumpmanager)
 			throw new Error("Invalid drink: no ingredients");
 
 		console.log("\033[31m[MSG] Creating a " + drink.name + " \033[91m");
+		console.log("\033[31m[MSG] Multiplyer of " + drink.size + " \033[91m");
 
 		var ingredients = drink.ingredients;
 		active = true;
@@ -115,7 +116,7 @@ var BarTender = function(pumpmanager)
 			(function (i) {
 				setTimeout(function () {  // Delay implemented to have a top-biased mix
 					var gpio = manager.getPumpByIngredient(ingredients[i].name);
-					pumpMilliseconds(gpio, ingredients[i].pump_time);
+					pumpMilliseconds(gpio, (ingredients[i].pump_time * drink.size));
 				}, ingredients[i].pump_start_delay);
 			})(i);
 		}

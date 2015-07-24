@@ -3,30 +3,11 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
-a {
-  color: #00B7FF;
-}
-
-.drink-inner {
-    border-radius: 5px;
-    padding: 10px;
-}
-.drink-inner:hover {
-    border: 1px solid;
-    box-shadow: 3px 5px 12px -4px;
-}
-
-.drink-inner h3 {
-    margin-top: 0;
-    text-align: center;
-}
 ul.ingredients {
-    padding-left: 10px;
-}
-
-.selected-drink {
-    border: 1px solid;
-    box-shadow: 3px 5px 12px -4px;
+	padding-left: 40px;
+	line-height: 1.5em;
+	font-size: 1.2em;
+	margin-top: 20px;
 }
 
 .button-container {
@@ -43,22 +24,24 @@ ul.ingredients {
 	width: 100%;
 }
 
-.drinkContainer {
-	display: inline-block;
-	height: 280px;
-	width: 31%;
-	margin: 10px;
-	line-height: 0.9em;
+.drink-color-background {
 	background-color: #FF0000;
+	padding: 0;
+	border-radius: 7px;
+}
+.drink-color-background.selected-drink .drinkContainer {
+	opacity: .6;
 }
 
-.drinkImage {
-	display: inline-block;
-	background-position: center;
-	background-size: cover;
-	height: 100%;
-	width: 100%;
-	opacity: 1;
+.drinkContainer {
+	height: 280px;
+	color: white;
+	border-radius: 7px;
+}
+.drinkContainer h3 {
+	background-color: rgba(0,0,0,.3);
+	text-align: center;
+	padding: 5px 0;
 }
 
 .drink-size-container {

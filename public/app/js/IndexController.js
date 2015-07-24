@@ -7,7 +7,7 @@
         this.drinks = Drink.query();
         this.drink = {
             id: '',
-            size: 'regular'
+            size: 1
         };
 
         this.make = function()
