@@ -6,14 +6,15 @@
 		<thead>
 		<tr>
 			<th>Name</th>
-			<th></th>
+			<th>Action</th>
 		</tr>
 		</thead>
 		<tbody>
 		<tr ng-repeat="drink in ctrl.drinks">
 			<td>{{drink.name}}</td>
-			<td>
-				<a ng-href="/manage/drinks/form/{{drink._id}}"><button>Edit</button></a>
+			<td style="text-align: right">
+				<button ng-click="ctrl.edit(drink)">Edit</button>
+				<button ng-click="ctrl.deleteDrink(drink)">Delete</button>
 			</td>
 		</tr>
 		</tbody>

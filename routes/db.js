@@ -19,7 +19,7 @@ exports.getGeneric = function(Model)
 {
 	return function(req, res)
 	{
-		Model.findbyId(req.params.id, function (err, record){
+		Model.findById(req.params.id, function (err, record){
 			if (err || !record) {
 				res.status(400);
 				res.json({error: err});

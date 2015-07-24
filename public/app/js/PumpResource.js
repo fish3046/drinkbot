@@ -6,7 +6,7 @@
 	{
 		return $resource('/db/pump/:id', {id: '@id'},
 			{
-				'update': {method: 'PUT', params: {id: '@id'}}
+				update: {method: 'PUT', params: {id: '@id'}}
 			}
 		);
 	}

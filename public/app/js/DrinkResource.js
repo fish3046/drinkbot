@@ -1,8 +1,8 @@
 (function ()	{
 	angular.module('drinks')
-		.factory('Drink', ['$resource', Drink]);
+		.factory('drinks.resource.DrinkResource', ['$resource', DrinkResource]);
 
-	function Drink($resource)
+	function DrinkResource($resource)
 	{
 		return $resource('/db/drink/:id', {id: '@id'},
 			{

@@ -1,6 +1,6 @@
 (function(){
     angular.module('drinks')
-        .controller('IndexController', ['DrinkService', 'Drink', IndexController]);
+        .controller('IndexController', ['DrinkService', 'drinks.resource.DrinkResource', IndexController]);
 
     function IndexController(DrinkService, Drink)
     {
