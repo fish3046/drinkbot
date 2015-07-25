@@ -59,8 +59,11 @@
 
 		this.save = function()
 		{
-			for (var i in this.pumps) {
-				this.pumps[i].$update({ id: this.pumps[i]._id });
+			for (var i = 0; i < this.pumps.length; i++) {
+				if (angular.isString(this.pumps[i]._id))
+					this.pumps[i].$update({id: this.pumps[i]._id});
+				else
+					this.pumps[i].$save();
 			}
 		};
 	}

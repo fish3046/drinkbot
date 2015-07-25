@@ -66,7 +66,11 @@
 				});
 			}, function (resp)
 			{
-				alert('Failed! ' + resp);
+				if (resp.hasOwnProperty('error')) {
+					alert(resp['error']);
+				} else {
+					alert('Failed! ' + resp);
+				}
 			});
 		};
 

@@ -30,6 +30,6 @@
 				$interval.cancel(interval);
 				$modalInstance.close();
 			}
-		}, 200);
+		}, 1000);
 	}
 }());

@@ -59,18 +59,23 @@ exports.putGeneric = function(Model)
 {
 	return function(req, res)
 	{
+		// Remove _id
+		var updateData = req.body;
+		delete updateData['_id'];
+
 		console.log(req.body);
 
 		Model.findOneAndUpdate(
-			{_id: req.params.id},
+			{ _id: req.params.id },
 			req.body,
+			{ 'new': true },
 			function (err, record) {
 				if (err || !record) {
 					res.status(400);
 					res.json({error: err});
 				} else {
 					res.status(200);
-					res.json(req.body);
+					res.json(record);
 				}
 			}
 		);
