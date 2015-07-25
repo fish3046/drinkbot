@@ -9,7 +9,8 @@ var bodyParser = require('body-parser');
 
 // BACKEND MODULES
 var robot = require('./modules/robot');
-var config = require('./modules/config');
+
+var config = require('./config');
 
 var mongoose = require('mongoose');
 var db = mongoose.connect(config.dburl);
@@ -54,7 +55,8 @@ var robotroutes = require('./routes/robot');
 var dbroutes = require('./routes/db');
 
 // ***** ROUTES *****
-app.get('/', routes.indexPage());
+app.get('/', routes.indexPage(config.env));
+app.get('/service/possible_drinks', routes.possibleDrinks(Pump, Drink));
 
 app.get('/db/drink', dbroutes.getAllGeneric(Drink));
 app.get('/db/drink/:id', dbroutes.getGeneric(Drink));

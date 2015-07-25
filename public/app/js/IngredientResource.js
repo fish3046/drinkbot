@@ -6,7 +6,7 @@
 	{
 		return $resource('/db/ingredient/:id', {id: '@id'},
 			{
-				'update': {method: 'PUT', params: {id: '@id'}}
+				update: {method: 'PUT', params: {id: '@id'}}
 			}
 		);
 	}

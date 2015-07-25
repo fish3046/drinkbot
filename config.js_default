@@ -1,3 +1,6 @@
+# Copy this to config.js to use
+
 module.exports = {
+	env: 'dev'	#dev|prod
 	dburl: 'mongodb://localhost:27017/drinkbot'
 };

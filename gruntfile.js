@@ -26,8 +26,6 @@ module.exports = function (grunt)
         // Used to copy files from the bower directory to our public/vendor when the grunt-bower-task can't
         // figure it out.
         // font-awesome:  needs to preserve the dir structure between css and fonts folders
-        // jquery.ui:     doesn't have a main specified in json, so need to choose which files we want
-        // ng-flow:       use standalone as well
         copy: {
             main: {
                 files: [
@@ -43,15 +41,7 @@ module.exports = function (grunt)
                         cwd: '<%=  config.bower_directory %>/bootstrap/dist',
                         src: ['**/!(*min*|npm.js)'],
                         dest: 'public/vendor/bootstrap'
-                    },
-                    // Moved to managed bower, now under angular-ui-bootstrap-bower package
-                    //{
-                    //      expand: true,
-                    //      cwd: '<%=  config.unmanaged_directory %>/angular-ui-bootstrap',
-                    //      //src: ['ui-bootstrap-tpls-0.11.0.js','ui-bootstrap-tpls-0.11.0.js'],
-                    //      src: ['ui-bootstrap-tpls-0.12.0.min.js','ui-bootstrap-tpls-0.12.0.min.js'],
-                    //      dest: 'public/vendor/angular-ui-bootstrap'
-                    //}
+                    }
                 ]
             }
         },
@@ -71,18 +61,10 @@ module.exports = function (grunt)
                     'public/js/<%= pkg.name %>.min.js': [
                         'public/vendor/jquery/jquery.js',
                         'public/vendor/angular/angular.js',
-                        //'public/vendor/angular-route/angular-route.js',
-                        //'public/vendor/angular-animate/angular-animate.js',
-                        'public/vendor/underscore/underscore.js',
-
                         'public/vendor/**/*.js',
 
-                        'public/js/app/base/**/*.js',
-                        'public/js/app/desktop/desktopApp.js',
-                        'public/js/app/desktop/**/*.js',
-                        'public/js/app/**/*.js',
-                        'public/js/AjaxResponse.js',
-                        'public/js/ValidationResponse.js'
+                        'public/app/js/app.js',
+                        'public/app/js/**/*.js'
                     ]
                 }
             }

@@ -7,12 +7,17 @@
 		this.drinks = Drink.query();
 		var self = this;
 
+		this.addRecord = function()
+		{
+			LocationService.go('/manage/drinks/form');
+		};
+
 		this.deleteDrink = function(drink)
 		{
 			if (confirm('Are you sure?')) {
-				drink.$delete(function(){
+				drink.$delete({id: drink._id}, function(){
 					for (var i in self.drinks) {
-						if (self.drinks == drink) {
+						if (self.drinks[i] == drink) {
 							self.drinks.splice(i, 1);
 							break;
 						}
