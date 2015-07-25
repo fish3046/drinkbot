@@ -1,5 +1,13 @@
-//var Gpio = require('onoff').Gpio;
-var Gpio = require('./gpiomock').Gpio;
+// If we are on the pi board, use the real GPIO lib, otherwise mock it
+var config = require('../config');
+var Gpio = null;
+if (config.env == 'prod') {
+	Gpio = require('onoff').Gpio;
+} else {
+	Gpio = require('./gpiomock').Gpio;
+}
+
+
 var manager;
 var bartender;
 
