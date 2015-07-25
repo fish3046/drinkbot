@@ -35,6 +35,28 @@
 			{id: 27, label: 'GPIO_27'}
 		];
 
+		this.deleteRecord = function(record)
+		{
+			if (confirm('Are you sure?')) {
+				record.$delete({id: record._id}, function(){
+					for (var i in self.pumps) {
+						if (self.pumps[i] == record) {
+							self.pumps.splice(i, 1);
+							break;
+						}
+					}
+				});
+			}
+		};
+
+		this.addPump = function()
+		{
+			if (!this.pumps)
+				this.pumps = [];
+
+			this.pumps.push(new Pump());
+		};
+
 		this.save = function()
 		{
 			for (var i in this.pumps) {

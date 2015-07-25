@@ -1,6 +1,7 @@
 <div class="content">
-	<button onclick="history.back()" class="btn btn-default pull-left">Back</button>
-	<button ng-click="ctrl.save()" class="btn btn-primary pull-right">Save</button>
+	<button onclick="history.back()" class="btn btn-default btn-lg pull-left">Back</button>
+	<button ng-click="ctrl.save()" class="btn btn-primary btn-lg pull-right">Save</button>
+	<button ng-click="ctrl.addPump()" class="btn btn-default btn-lg pull-right" style="margin-right: 20px">Add</button>
 	<h1 class="text-center">Manage Pumps</h1>
 
 	<table class="table">
@@ -8,6 +9,7 @@
 		<tr>
 			<th>PIN</th>
 			<th>Ingredient</th>
+			<!--<th>Action</th>-->
 		</tr>
 		</thead>
 		<tbody>
@@ -23,6 +25,9 @@
 					<option ng-repeat="possibleIngredient in ctrl.ingredients" value="{{possibleIngredient.name}}" ng-selected="possibleIngredient.name == pump.ingredient">{{possibleIngredient.name}}</option>
 				</select>
 			</td>
+			<!--<td class="text-right">
+				<button ng-click="ctrl.deleteRecord(pump)">Delete</button>
+			</td>-->
 		</tr>
 		</tbody>
 	</table>
