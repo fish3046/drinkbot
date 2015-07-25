@@ -22,6 +22,9 @@
 
 		this.addIngredient = function()
 		{
+			if (!this.drink.ingredients)
+				this.drink.ingredients = [];
+
 			this.drink.ingredients.push({});
 		};
 

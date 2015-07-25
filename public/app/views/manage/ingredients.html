@@ -10,7 +10,7 @@
 		</tr>
 		</thead>
 		<tbody>
-		<tr ng-repeat="ingredient in ctrl.ingredients">
+		<tr ng-repeat="ingredient in ctrl.ingredients | orderBy:'name'">
 			<td>{{ingredient.name}}</td>
 			<td style="text-align: right">
 				<button ng-click="ctrl.edit(ingredient)">Edit</button>

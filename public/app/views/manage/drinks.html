@@ -10,7 +10,7 @@
 		</tr>
 		</thead>
 		<tbody>
-		<tr ng-repeat="drink in ctrl.drinks">
+		<tr ng-repeat="drink in ctrl.drinks | orderBy:'name'">
 			<td>{{drink.name}}</td>
 			<td style="text-align: right">
 				<button ng-click="ctrl.edit(drink)">Edit</button>

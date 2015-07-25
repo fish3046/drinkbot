@@ -2,29 +2,32 @@
 	<div class="pump-config well">
 		<div class="col-xs-2" ng-repeat="pump in ctrl.pumps">
 			<!--<select class="form-control" ng-options="ingoption.name for ingoption in ctrl.ingredients track by ingoption.name" ng-model="ing.name">-->
-			<select class="form-control" ng-model="pump.ingredient">
-				<option ng-repeat="possibleIngredient in ctrl.ingredients" value="{{possibleIngredient.name}}" ng-selected="possibleIngredient.name == pump.ingredient" ng-click="ctrl.changePumpIngredient(pump, possibleIngredient)" ng-model="pump.dummyvar">{{possibleIngredient.name}}</option>
+			<select class="form-control" ng-model="pump.ingredient" ng-change="ctrl.changePumpIngredient(pump)">
+				<option value=""></option>
+				<option ng-repeat="possibleIngredient in ctrl.ingredients" value="{{possibleIngredient.name}}" ng-selected="possibleIngredient.name == pump.ingredient">{{possibleIngredient.name}}</option>
 			</select>
 		</div>
 		<div class="clearfix"></div>
 	</div>
 
 	<div id="drinks" class="well">
-		<div
-			class="col-sm-4 drink-color-background"
-			ng-repeat="drink in ctrl.drinks"
-			ng-class="{'selected-drink': ctrl.drink.id == drink._id}">
-
+		<div class="col-sm-4 " ng-repeat="drink in ctrl.drinks">
 			<div
-				class="drinkContainer"
-				style="background-image: url('/img/drinks/{{drink.image || 'no_image.jpg'}}')"
-				ng-click="ctrl.drink.id = drink._id">
+				class="drink-color-background"
 
-				<div class="clearfix"></div>
-				<h3>{{drink.name}}</h3>
-				<ul class="ingredients">
-					<li ng-repeat="ingredient in drink.ingredients">{{ingredient.desc}}</li>
-				</ul>
+				ng-class="{'selected-drink': ctrl.drink.id == drink._id}">
+
+				<div
+					class="drinkContainer"
+					style="background-image: url('/img/drinks/{{drink.image || 'no_image.jpg'}}')"
+					ng-click="ctrl.drink.id = drink._id">
+
+					<div class="clearfix"></div>
+					<h3>{{drink.name}}</h3>
+					<ul class="ingredients">
+						<li ng-repeat="ingredient in drink.ingredients | filter: { desc:'' }">{{ingredient.desc}}</li>
+					</ul>
+				</div>
 			</div>
 		</div>
 
@@ -51,6 +54,10 @@
 		<button class="btn btn-default" id="make-button" ng-click="ctrl.make()">PREPARE YOURSELF</button>
 	</div>
 </div>
+
+<footer>
+	<p>An Agan FiSH Production</p>
+</footer>
 
 <script type="text/ng-tempalte" id="make-modal">
 	<div class="modal-header">
