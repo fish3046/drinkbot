@@ -1,5 +1,5 @@
 (function(){
-    angular.module('drinks', ['ngResource','ngRoute'])
+    angular.module('drinks', ['ngResource','ngRoute','ui.bootstrap'])
         .config(['$locationProvider', '$routeProvider', drinkConfig])
     ;
 

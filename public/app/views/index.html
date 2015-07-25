@@ -59,13 +59,13 @@
 	<p>An Agan FiSH Production</p>
 </footer>
 
-<script type="text/ng-tempalte" id="make-modal">
+<script type="text/ng-template" id="make-modal.html">
 	<div class="modal-header">
 		<h3 class="modal-title">Making drink...</h3>
 	</div>
 	<div class="modal-body">
-		<img src="/img/dog-shaker.gif" alt="Please wait"/>
+		<img id="dog-shaker" src="/img/dog-shaker.gif" alt="Please wait"/>
 
-		<progressbar animate="true"></progressbar>
+		<progressbar class="progress-striped active" value="modalctrl.progressCurrent" max="modalctrl.progressMax"></progressbar>
 	</div>
 </script>

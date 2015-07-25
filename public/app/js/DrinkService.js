@@ -7,8 +7,8 @@
         this.make = function(drink){
             var deferred = $q.defer();
 
-            $http.post('/robot/make', drink).then(function(){
-                deferred.resolve();
+            $http.post('/robot/make', drink).then(function(resp){
+                deferred.resolve(resp.data);
             }, function(resp){
                 deferred.reject(resp);
             });

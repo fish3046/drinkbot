@@ -1,8 +1,8 @@
 (function (){
 	angular.module('drinks')
-		.controller('IndexController', ['DrinkService', 'drinks.resource.PumpResource', 'Ingredient', IndexController]);
+		.controller('IndexController', ['$modal', 'DrinkService', 'drinks.resource.PumpResource', 'Ingredient', IndexController]);
 
-	function IndexController(DrinkService, Pump, Ingredient)
+	function IndexController($modal, DrinkService, Pump, Ingredient)
 	{
 		this.drinks = [];
 		this.pumps = Pump.query();
@@ -39,6 +39,9 @@
 			});
 		};
 
+		/**
+		 * Make a drink!
+		 */
 		this.make = function ()
 		{
 			if (this.drink.id == '') {
@@ -46,9 +49,21 @@
 				return;
 			}
 
-			DrinkService.make(this.drink).then(function ()
+			DrinkService.make(this.drink).then(function (resp)
 			{
-				alert('Done!');
+				var drinkDuration = resp.duration;
+
+				var modal = $modal.open({
+					templateUrl: 'make-modal.html',
+					windowClass: 'make-modal',
+					controller: 'drinks.controller.MakeModalController',
+					controllerAs: 'modalctrl',
+					resolve: {
+						duration: function() {
+							return drinkDuration;
+						}
+					}
+				});
 			}, function (resp)
 			{
 				alert('Failed! ' + resp);

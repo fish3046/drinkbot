@@ -52,6 +52,13 @@ ul.ingredients {
 	width: 32%;
 }
 
+.make-modal {
+	text-align: center;
+}
+.make-modal #dog-shaker {
+	margin-bottom: 10px;
+}
+
 footer {
 	margin-top: 20px;
 }
