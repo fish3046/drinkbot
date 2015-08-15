@@ -9,7 +9,7 @@
 		<tr>
 			<th>PIN</th>
 			<th>Ingredient</th>
-			<!--<th>Action</th>-->
+			<th>ml/minute Rating</th>
 		</tr>
 		</thead>
 		<tbody>
@@ -24,6 +24,9 @@
 					<option value=""></option>
 					<option ng-repeat="possibleIngredient in ctrl.ingredients" value="{{possibleIngredient.name}}" ng-selected="possibleIngredient.name == pump.ingredient">{{possibleIngredient.name}}</option>
 				</select>
+			</td>
+			<td>
+				<input class="form-control" type="text" ng-model="pump.ml_per_minute"/>
 			</td>
 			<!--<td class="text-right">
 				<button ng-click="ctrl.deleteRecord(pump)">Delete</button>

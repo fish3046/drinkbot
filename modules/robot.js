@@ -18,7 +18,7 @@ var bartender;
  * @constructor
  */
 var PumpManager = function(pumps){
-	// Array of GPIO pins, keyed to ingredient ID
+	// Array of GPIO pins, keyed to ingredient name
 	var ingredient_to_gpio = {};
 	// Array of Gpio objects, keyed to pin number
 	var gpios = {};
@@ -76,13 +76,14 @@ var PumpManager = function(pumps){
 };
 
 
-var BarTender = function(pumpmanager)
+var BarTender = function(pumpmanager, pus)
 {
 	var manager = pumpmanager;
 	var activePumps = 0;
 	var active = false;
 	var completeCallback;
 	var currentDrink = null;
+	var pumps = pus;
 
 	/**
 	 * Checks if we our PumpManager knows about all the ingredients
@@ -124,7 +125,14 @@ var BarTender = function(pumpmanager)
 			(function (i) {
 				setTimeout(function () {  // Delay implemented to have a top-biased mix
 					var gpio = manager.getPumpByIngredient(ingredients[i].name);
-					pumpMilliseconds(gpio, (ingredients[i].pump_time * drink.size));
+					var pump = getPump(ingredients[i].name);
+
+					var rating = pump.ml_per_minute;
+					var ml = ingredients[i].ml;
+					// Duration is rated in milliseconds
+					var duration = (ml / rating) * 60000;
+
+					pumpMilliseconds(gpio, (duration * drink.size));
 				}, ingredients[i].pump_start_delay);
 			})(i);
 		}
@@ -140,8 +148,23 @@ var BarTender = function(pumpmanager)
 		return active;
 	};
 
+	/**
+	 * drunk
+	 * @param {string} ingredientName
+	 * @returns {Pump}
+	 */
+	function getPump(ingredientName)
+	{
+		for (var i = 0; i < pumps.length; i++) {
+			if (pumps[i].ingredient == ingredientName) {
+				return pumps[i];
+			}
+		}
+	}
+
 	function pumpMilliseconds(pump, ms)
 	{
+		console.log("\033[32m[PUMP] Starting " + pump.gpio + " for " + ms + "ms \033[91m");
 		startPump(pump);
 
 		setTimeout(function () {
@@ -171,7 +194,6 @@ var BarTender = function(pumpmanager)
 
 	function startPump(gpio)
 	{
-		console.log("\033[32m[PUMP] Starting " + gpio.gpio + "\033[91m");
 		gpio.writeSync(1);
 		++activePumps;
 	}
@@ -191,7 +213,7 @@ var BarTender = function(pumpmanager)
 exports.init = function(pumps)
 {
 	manager = new PumpManager(pumps);
-	bartender = new BarTender(manager);
+	bartender = new BarTender(manager, pumps);
 
 	console.log("\033[31m[MSG] Drink Bot Ready\033[91m");
 	console.log("\033[31m[MSG] Managing " + manager.pumpCount() + " pumps\033[91m");

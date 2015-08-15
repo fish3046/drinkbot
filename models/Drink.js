@@ -6,7 +6,7 @@ var ds = new mongoose.Schema({
 	ingredients: [{
 		name: { type: String, required: true },
 		desc: String,
-		pump_time: { type: Number, required: true },
+		ml: { type: Number, required: true },
 		pump_start_delay: Number
 	}]
 });
