@@ -22,14 +22,9 @@ var Ingredient = db.model('ingredients', IngredientSchema);
 var PumpSchema = require('./models/Pump.js').PumpSchema;
 var Pump = db.model('pumps', PumpSchema);
 
-// Retrieve pump configuration from mongo, and pass it to the robot
-Pump.find({}, function(err, records){
-	if (err || !records) {
-		throw new Error("Error fetch pump config from mongo: " + err);
-	}
-
-	robot.init(records);
-});
+// Fetch pumps and feed them to robot classes.  This will need to be done after each pump update,
+// because we cache the pump information
+initRobot();
 
 
 // APPLICATION INSTANCE
@@ -72,9 +67,24 @@ app.delete('/db/ingredient/:id', dbroutes.deleteGeneric(Ingredient));
 
 app.get('/db/pump', dbroutes.getAllGeneric(Pump));
 app.get('/db/pump/:id', dbroutes.getGeneric(Pump));
-app.post('/db/pump', dbroutes.postGeneric(Pump));
-app.put('/db/pump/:id', dbroutes.putGeneric(Pump));
-app.delete('/db/pump/:id', dbroutes.deleteGeneric(Pump));
+app.post('/db/pump', function(req,res){
+	var handler = dbroutes.postGeneric(Pump);
+	var responseobj = handler(req,res);
+	initRobot();
+	return responseobj;
+});
+app.put('/db/pump/:id', function(req,res){
+	var handler = dbroutes.putGeneric(Pump);
+	var responseobj = handler(req,res);
+	initRobot();
+	return responseobj;
+});
+app.delete('/db/pump/:id', function(req,res){
+	var handler = dbroutes.deleteGeneric(Pump)();
+	var responseobj = handler(req,res);
+	initRobot();
+	return responseobj;
+});
 
 app.post('/robot/make', robotroutes.makeDrink(Drink, robot));
 // ***** END ROUTES *****
@@ -141,3 +151,19 @@ var gracefulShutdown = function() {
 process.on('SIGTERM', gracefulShutdown);
 // listen for INT signal e.g. Ctrl-C
 process.on('SIGINT', gracefulShutdown);
+
+/**
+ * Fetch pumps and feed them to robot classes.  This will need to be done after each pump update,
+ * because we cache the pump information
+ */
+function initRobot()
+{
+	// Retrieve pump configuration from mongo, and pass it to the robot
+	Pump.find({}, function(err, records){
+		if (err || !records) {
+			throw new Error("Error fetch pump config from mongo: " + err);
+		}
+
+		robot.init(records);
+	});
+}
