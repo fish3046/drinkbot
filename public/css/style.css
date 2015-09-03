@@ -61,3 +61,13 @@ footer {
 footer p {
 	text-align: center;
 }
+
+/* BOOTSTRAP OVERRIDES */
+
+.dropdown-menu {
+	font-size: 24px;
+}
+
+.dropdown-menu > li > a {
+	line-height: 2;
+}

@@ -1,0 +1,48 @@
+<div class="content">
+	<button onclick="history.back()" class="btn btn-default btn-lg pull-left">Back</button>
+	<button ng-click="ctrl.save()" class="btn btn-primary btn-lg pull-right">Save</button>
+	<h1 class="text-center">{{ctrl.title()}}</h1>
+
+	<form ng-submit="false">
+		<div class="form-group">
+			<label for="name">Name</label>
+			<input type="text" class="form-control" id="name" placeholder="Drink Name" ng-model="ctrl.drink.name"/>
+		</div>
+		<div class="form-group">
+			<label for="image">Image</label>
+			<input type="text" class="form-control" id="image" placeholder="Image file" ng-model="ctrl.drink.image"/>
+		</div>
+
+		<button ng-click="ctrl.addIngredient()" class="btn btn-default pull-right">Add</button>
+		<h2>Ingredients</h2>
+
+		<div class="col-sm-6" ng-repeat="ing in ctrl.drink.ingredients">
+			<div class="well">
+				<button ng-click="ctrl.removeIngredient(ing)" class="btn btn-default pull-right">Remove</button>
+
+				<div class="form-group">
+					<label>Ingredient</label>
+					<!--<select class="form-control" ng-options="ingoption.name for ingoption in ctrl.ingredients track by ingoption.name" ng-model="ing.name">-->
+					<select class="form-control" ng-model="ing.name">
+						<option ng-repeat="possibleIngredient in ctrl.ingredients" value="{{possibleIngredient.name}}" ng-selected="possibleIngredient.name == ing.name">{{possibleIngredient.name}}</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label>Description</label>
+					<input class="form-control" type="text" ng-model="ing.desc"/>
+				</div>
+				<div class="form-group">
+					<label>Amount (in milliliters)</label>
+					<input class="form-control" type="text" ng-model="ing.ml"/>
+				</div>
+				<div class="form-group">
+					<label>Pump Start Delay (in milliseconds)</label>
+					<input class="form-control" type="text" ng-model="ing.pump_start_delay"/>
+					<p class="help-block">Amount of time the robot will wait after the drink begins to turn on this pump.  If
+						you want this ingredient to end up on top of the drink, increase this value.</p>
+				</div>
+			</div>
+		</div>
+
+	</form>
+</div>

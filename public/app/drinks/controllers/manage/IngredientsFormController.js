@@ -1,6 +1,6 @@
 (function(){
 	angular.module('drinks')
-		.controller('drinks.manage.IngredientsFormController', ['$routeParams','Ingredient', 'drinks.service.LocationService', IngredientsFormController]);
+		.controller('drinks.controllers.manage.IngredientsFormController', ['$routeParams','Ingredient', 'drinks.service.LocationService', IngredientsFormController]);
 
 	function IngredientsFormController($routeParams, Ingredient, LocationService)
 	{
@@ -24,7 +24,9 @@
 			if (angular.isString(this.ingredient._id))
 				this.ingredient.$update({id: this.ingredient._id}, navBack);
 			else
-				this.ingredient.$save(navBack);
+				this.ingredient.$save(navBack, function(resp){
+					console.log(resp);
+				});
 		};
 
 		function navBack()

@@ -11,42 +11,42 @@
 
         $routeProvider
 			.when('/manage/drinks', {
-				templateUrl: '/app/views/manage/drinks.html',
-				controller: 'drinks.manage.DrinksController',
+				templateUrl: '/app/drinks/views/manage/drinks.html',
+				controller: 'drinks.controllers.manage.DrinksController',
 				controllerAs: 'ctrl'
 			})
 			.when('/manage/drinks/form', {
-				templateUrl: '/app/views/manage/drinksform.html',
-				controller: 'drinks.manage.DrinksFormController',
+				templateUrl: '/app/drinks/views/manage/drinksform.html',
+				controller: 'drinks.controllers.manage.DrinksFormController',
 				controllerAs: 'ctrl'
 			})
 			.when('/manage/drinks/form/:id', {
-				templateUrl: '/app/views/manage/drinksform.html',
-				controller: 'drinks.manage.DrinksFormController',
+				templateUrl: '/app/drinks/views/manage/drinksform.html',
+				controller: 'drinks.controllers.manage.DrinksFormController',
 				controllerAs: 'ctrl'
 			})
 			.when('/manage/ingredients', {
-				templateUrl: '/app/views/manage/ingredients.html',
-				controller: 'drinks.manage.IngredientsController',
+				templateUrl: '/app/drinks/views/manage/ingredients.html',
+				controller: 'drinks.controllers.manage.IngredientsController',
 				controllerAs: 'ctrl'
 			})
 			.when('/manage/ingredients/form', {
-				templateUrl: '/app/views/manage/ingredientsform.html',
-				controller: 'drinks.manage.IngredientsFormController',
+				templateUrl: '/app/drinks/views/manage/ingredientsform.html',
+				controller: 'drinks.controllers.manage.IngredientsFormController',
 				controllerAs: 'ctrl'
 			})
 			.when('/manage/ingredients/form/:id', {
-				templateUrl: '/app/views/manage/ingredientsform.html',
-				controller: 'drinks.manage.IngredientsFormController',
+				templateUrl: '/app/drinks/views/manage/ingredientsform.html',
+				controller: 'drinks.controllers.manage.IngredientsFormController',
 				controllerAs: 'ctrl'
 			})
 			.when('/manage/pumps', {
-				templateUrl: '/app/views/manage/pumps.html',
-				controller: 'drinks.manage.PumpsController',
+				templateUrl: '/app/drinks/views/manage/pumps.html',
+				controller: 'drinks.controllers.manage.PumpsController',
 				controllerAs: 'ctrl'
 			})
 			.otherwise({
-				templateUrl: '/app/views/index.html',
+				templateUrl: '/app/drinks/views/index.html',
 				controller: 'IndexController',
 				controllerAs: 'ctrl'
 			})
