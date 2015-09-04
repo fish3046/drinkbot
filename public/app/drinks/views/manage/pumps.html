@@ -7,13 +7,18 @@
 	<table class="table">
 		<thead>
 		<tr>
+			<th style="width:100px">Order</th>
 			<th>PIN</th>
 			<th>Ingredient</th>
 			<th>ml/minute Rating</th>
 		</tr>
 		</thead>
 		<tbody>
-		<tr ng-repeat="pump in ctrl.pumps">
+		<tr ng-repeat="pump in ctrl.pumps | orderBy:'order'">
+			<td>
+				<button class="btn btn-default" ng-click="ctrl.movePumpUp(pump)"><span class="glyphicon glyphicon-menu-up"></span></button>
+				<button class="btn btn-default" ng-click="ctrl.movePumpDown(pump)"><span class="glyphicon glyphicon-menu-down"></span></button>
+			</td>
 			<td>
 				<select class="form-control" ng-model="pump.pin">
 					<option ng-repeat="pin in ctrl.pins" value="{{pin.id}}" ng-selected="pin.id == pump.pin">{{pin.label}}</option>

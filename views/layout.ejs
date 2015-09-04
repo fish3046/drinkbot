@@ -10,9 +10,9 @@
 	<link rel="stylesheet" href="/css/style.css"/>
 </head>
 <body>
-<div ng-controller="drinks.controller.DesktopController as deskctrl">
+<div class="container-fluid">
 	<!-- Static navbar -->
-	<nav class="navbar navbar-default" ng-controller="drinks.controller.NavbarController as ctrl">
+	<nav class="navbar navbar-default">
 		<div class="container-fluid">
 			<div class="navbar-header">
 				<a class="navbar-brand" ng-href="/">Drankz</a>
@@ -21,16 +21,24 @@
 				<li class="dropdown">
 					<a ng-href="" class="dropdown-toggle" data-toggle="dropdown" role="button">Manage <span class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li><a ng-href="" ng-click="ctrl.go('/manage/drinks')">Drinks</a></li>
-						<li><a ng-href="" ng-click="ctrl.go('/manage/ingredients')">Ingredients</a></li>
-						<li><a ng-href="" ng-click="ctrl.go('/manage/pumps')">Pumps</a></li>
+						<li><a ng-href="" nav="/manage/drinks">Drinks</a></li>
+						<li><a ng-href="" nav="/manage/ingredients">Ingredients</a></li>
+						<li><a ng-href="" nav="/manage/pumps">Pumps</a></li>
 					</ul>
 				</li>
 			</ul>
 		</div>
 	</nav>
 
+	<!-- Alerts -->
+	<div ng-controller="common.AlertController" id="alerts-container">
+		<alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)" dismiss-on-timeout="{{alert.timeout}}	">
+			<div ng-bind-html="alert.msg"></div>
+		</alert>
+	</div>
+
 	<div ng-view=""></div>
+
 </div>
 
 <%if (env == 'prod') { %>
@@ -46,10 +54,14 @@
 <script src="/vendor/bootstrap/js/bootstrap.js"></script>
 <script src="/vendor/angular-ui-bootstrap-bower/ui-bootstrap-tpls.js"></script>
 
+<script src="/app/common/app.js" type="application/javascript"></script>
+<script src="/app/common/AlertController.js" type="application/javascript"></script>
+<script src="/app/common/AlertService.js" type="application/javascript"></script>
+<script src="/app/common/directives/app.js" type="application/javascript"></script>
+<script src="/app/common/directives/nav.js" type="application/javascript"></script>
+
 <script src="/app/drinks/app.js" type="application/javascript"></script>
-<script src="/app/drinks/controllers/DesktopController.js" type="application/javascript"></script>
 <script src="/app/drinks/controllers/IndexController.js" type="application/javascript"></script>
-<script src="/app/drinks/controllers/NavbarController.js" type="application/javascript"></script>
 <script src="/app/drinks/controllers/MakeModalController.js" type="application/javascript"></script>
 <script src="/app/drinks/services/LocationService.js" type="application/javascript"></script>
 <script src="/app/drinks/services/DrinkService.js" type="application/javascript"></script>

@@ -39,7 +39,7 @@
 		{
 			if (confirm('Are you sure?')) {
 				record.$delete({id: record._id}, function(){
-					for (var i in self.pumps) {
+					for (var i = 0; i < self.pumps.length; i++) {
 						if (self.pumps[i] == record) {
 							self.pumps.splice(i, 1);
 							break;
@@ -65,6 +65,60 @@
 				else
 					this.pumps[i].$save();
 			}
+		};
+
+		/**
+		 * Move a pump up in the order
+		 * @param pump
+		 */
+		this.movePumpUp = function(pump)
+		{
+			// Init if necessary
+			if (isNaN(pump.order)) {
+				pump.order = 0;
+			}
+
+			if (pump.order == 0) {
+				return;
+			}
+
+			var newOrder = pump.order - 1;
+
+			for (var i = 0; i < this.pumps.length; i++) {
+				if (this.pumps[i].order == newOrder) {
+					++this.pumps[i].order;
+					break;
+				}
+			}
+
+			pump.order = newOrder;
+		};
+
+		/**
+		 * Move a pump down in the order
+		 * @param pump
+		 */
+		this.movePumpDown = function(pump)
+		{
+			// Init if necessary
+			if (isNaN(pump.order)) {
+				pump.order = 0;
+			}
+
+			if (pump.order >= this.pumps.length - 1) {
+				return;
+			}
+
+			var newOrder = pump.order + 1;
+
+			for (var i = 0; i < this.pumps.length; i++) {
+				if (this.pumps[i].order == newOrder) {
+					--this.pumps[i].order;
+					break;
+				}
+			}
+
+			pump.order = newOrder;
 		};
 	}
 })();

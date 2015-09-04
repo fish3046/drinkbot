@@ -1,0 +1,4 @@
+db.pumps.update({},
+                   {$set : {"order":0}},
+                          {upsert:false,
+                          multi:true})

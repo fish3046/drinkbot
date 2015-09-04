@@ -1,8 +1,8 @@
 (function(){
 	angular.module('drinks')
-		.controller('drinks.controllers.manage.DrinksFormController', ['$routeParams','drinks.resource.DrinkResource','Ingredient','drinks.service.LocationService', DrinksFormController]);
+		.controller('drinks.controllers.manage.DrinksFormController', ['$routeParams','drinks.resource.DrinkResource','Ingredient','drinks.service.LocationService', 'common.AlertService', DrinksFormController]);
 
-	function DrinksFormController($routeParams, Drink, Ingredient, LocationService)
+	function DrinksFormController($routeParams, Drink, Ingredient, LocationService, AlertService)
 	{
 		this.drink = new Drink();
 		this.ingredients = Ingredient.query();
@@ -43,7 +43,9 @@
 			if (angular.isString(this.drink._id))
 				this.drink.$update({id: this.drink._id}, navBack);
 			else
-				this.drink.$save(navBack);
+				this.drink.$save(navBack, function(resp){
+					AlertService.error(resp.data.error.message);
+				});
 		};
 
 		function navBack()
