@@ -1,6 +1,6 @@
 <div class="content">
 	<div class="pump-config well">
-		<div class="col-xs-2" ng-repeat="pump in ctrl.pumps">
+		<div class="col-xs-2" ng-repeat="pump in ctrl.pumps | orderBy:'order'">
 			<!--<select class="form-control" ng-options="ingoption.name for ingoption in ctrl.ingredients track by ingoption.name" ng-model="ing.name">-->
 			<select class="form-control" ng-model="pump.ingredient" ng-change="ctrl.changePumpIngredient(pump)">
 				<option value=""></option>
