@@ -63,8 +63,8 @@ module.exports = function (grunt)
                         'public/vendor/angular/angular.js',
                         'public/vendor/**/*.js',
 
-                        'public/app/js/app.js',
-                        'public/app/js/**/*.js'
+                        'public/app/drinks/app.js',
+                        'public/app/**/*.js'
                     ]
                 }
             }
