@@ -54,7 +54,10 @@
 			if (!this.pumps)
 				this.pumps = [];
 
-			this.pumps.push(new Pump());
+			var p = new Pump();
+			p.order = this.pumps.length;
+
+			this.pumps.push(p);
 		};
 
 		this.save = function()
