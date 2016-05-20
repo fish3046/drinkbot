@@ -3,6 +3,7 @@ var gulp = require("gulp");
 var concat = require("gulp-concat");
 var uglify = require("gulp-uglify");
 var sourcemaps = require("gulp-sourcemaps");
+var bowerfiles = require("main-bower-files");
 
 
 /**
@@ -53,4 +54,9 @@ gulp.task('watch', function(){
 	watch(scriptFiles, function(events){
 		gulp.start('default');
 	});
+});
+
+gulp.task('bower-install', function(){
+	gulp.src(bowerfiles(), { base: 'bower_components' })
+		.pipe(gulp.dest('public/vendor'));
 });
