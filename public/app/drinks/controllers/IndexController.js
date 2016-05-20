@@ -1,8 +1,8 @@
 (function (){
 	angular.module('drinks')
-		.controller('IndexController', ['$modal', 'DrinkService', 'drinks.resource.PumpResource', 'Ingredient', IndexController]);
+		.controller('IndexController', ['$uibModal', 'DrinkService', 'drinks.resource.PumpResource', 'Ingredient', IndexController]);
 
-	function IndexController($modal, DrinkService, Pump, Ingredient)
+	function IndexController($uibModal, DrinkService, Pump, Ingredient)
 	{
 		this.drinks = [];
 		this.pumps = Pump.query();
@@ -53,7 +53,7 @@
 			{
 				var drinkDuration = resp.duration;
 
-				var modal = $modal.open({
+				var modal = $uibModal.open({
 					templateUrl: 'make-modal.html',
 					windowClass: 'make-modal',
 					controller: 'drinks.controller.MakeModalController',

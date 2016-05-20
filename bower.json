@@ -1,6 +1,6 @@
 {
   "name": "drinks",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "authors": [
     "Karl Pierce <fishish@gmail.com>"
   ],
@@ -13,13 +13,16 @@
     "tests"
   ],
   "dependencies": {
-    "angular": "~1.4.3",
-    "angular-route": "~1.4.3",
-    "angular-resource": "~1.4.3",
+    "angular": "~1.5",
+    "angular-route": "~1.5",
+    "angular-resource": "~1.5",
     "bootstrap": "~3.3.4",
-    "angular-ui-bootstrap-bower": "~0.13.1"
+    "angular-ui-bootstrap-bower": "^1.3.2"
   },
   "exportsOverride": {
     "bootstrap": {}
+  },
+  "resolutions": {
+    "angular": "~1.5"
   }
 }

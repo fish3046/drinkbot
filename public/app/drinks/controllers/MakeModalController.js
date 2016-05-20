@@ -2,9 +2,9 @@
 	'use strict';
 
 	angular.module('drinks')
-		.controller('drinks.controller.MakeModalController', ['$modalInstance', '$interval', 'duration', MakeModalController]);
+		.controller('drinks.controller.MakeModalController', ['$uibModalInstance', '$interval', 'duration', MakeModalController]);
 
-	function MakeModalController($modalInstance, $interval, duration)
+	function MakeModalController($uibModalInstance, $interval, duration)
 	{
 		/**
 		 * Let the pumps stop
@@ -28,7 +28,7 @@
 
 			if (elapsed >= modalShowTime) {
 				$interval.cancel(interval);
-				$modalInstance.close();
+				$uibModalInstance.close();
 			}
 		}, 1000);
 	}
